@@ -25,8 +25,24 @@
     )
   )
 
+
+(defn expand
+  "Expand sequences to a vector of letters per position in those sequences.
+  Then count the frequency of those letters and return them as maps."
+  [sequences]
+  (map (fn [bases] (reduce #(assoc %1 %2 (inc (%1 %2 0))) {} bases))
+    (apply map vector sequences))
+  )
+
 (defn collapse
+  "From a map of letters with frequency value, select the one with the highest
+  frequency. If two letters have the same highest frequency, return underscore."
+  [expanse]
+
+  )
+
+(defn collapseSequences
   "Collapse multiple similar strings into the most likely common ancestor"
   [sequences]
-  (apply map vector sequences)
+  (collapse (expand sequences))
   )

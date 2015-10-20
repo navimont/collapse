@@ -31,3 +31,12 @@
     (is (isInEditDistance "stef" "stefan" 0))
     )
   )
+
+(deftest expand-sequences
+  (testing "expand"
+    (is (=
+          '({\s 3} {\t 3} {\e 3} {\p 1, \f 2} {\h 1, \f 2} {\a 3} {\m 1, \n 2})
+          (expand ["steffan" "stephan" "steffam"]))
+          )
+    )
+  )
