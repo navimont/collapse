@@ -27,8 +27,10 @@
 
 
 (defn expand
-  "Expand sequences to a vector of letters per position in those sequences.
-  Then count the frequency of those letters and return them as maps."
+  "Expand string sequences to a vector of letters per position in those sequences.
+  Then count the frequency of those letters and return them as maps.
+  Example: (expand [[abc] [aab] [abb]]) ;; or use quoted strings
+       ({\\a 3} {\\a 1, \\b 2} {\\c 1 \\b 2})  "
   [sequences]
   (map (fn [bases] (reduce #(assoc %1 %2 (inc (%1 %2 0))) {} bases))
     (apply map vector sequences))
@@ -38,7 +40,20 @@
   "From a map of letters with frequency value, select the one with the highest
   frequency. If two letters have the same highest frequency, return underscore."
   [expanse]
-
+  (loop [[lf1 lf2 & lfs] (into [] expanse)]
+    (if (nil? lf2)
+      (get lf1 0)
+      (let [[[l1 f1] [l2 f2]] [lf1 lf2]]
+        (if (> f1 f2)
+          (recur (cons lf1 lfs))
+          (if (< f1 f2)
+            (recur (cons lf2 lfs))
+            (recur (cons [\_ f1] lfs))
+            )
+          )
+        )
+      )
+    )
   )
 
 (defn collapseSequences

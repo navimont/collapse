@@ -40,3 +40,34 @@
           )
     )
   )
+
+(deftest collapse-letters-1
+  (testing ""
+    (is (= \s (collapse {\s 2})))
+    )
+  )
+
+(deftest collapse-letters-2
+  (testing ""
+    (is (= \s (collapse {\s 2 \c 1})))
+    )
+  )
+
+(deftest collapse-letters-3
+  (testing ""
+    (is (= \d (collapse {\s 2 \c 1 \d 4})))
+    )
+  )
+
+(deftest collapse-letters-_
+  (testing ""
+    (is (= \_ (collapse {\s 2 \c 1 \d 2})))
+    )
+  )
+
+(deftest collapse-letters-empty
+  (testing ""
+    (is (nil? (collapse {})))
+    )
+  )
+
