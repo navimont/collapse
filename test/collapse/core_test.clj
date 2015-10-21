@@ -71,3 +71,9 @@
     )
   )
 
+(deftest collapse-sequences
+  (testing ""
+    (is (= "STEFAN" (collapseSequences ["STEFAN" "STEPAN" "STEFAM"])))
+    )
+  )
+
